@@ -39,6 +39,7 @@ class _BaseViewState extends State<BaseView> {
       if (GoRouter.of(context).location == RoutePath.dashboard.path ||
           GoRouter.of(context).location == RoutePath.upcomingMovies.path ||
           GoRouter.of(context).location == RoutePath.media.path ||
+          GoRouter.of(context).location == RoutePath.search.path ||
           GoRouter.of(context).location == RoutePath.more.path) {
         showBottomBar = true;
         setState(() {});

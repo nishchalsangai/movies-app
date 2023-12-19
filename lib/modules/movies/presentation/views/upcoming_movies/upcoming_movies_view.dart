@@ -24,8 +24,13 @@ class _UpcomingMoviesViewState extends State<UpcomingMoviesView> {
         centerTitle: false,
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.search),
+            onPressed: () {
+              context.push(RoutePath.search.path);
+            },
+            icon: const Hero(
+              tag: 'search-hero',
+              child: Icon(Icons.search),
+            ),
           ),
         ],
       ),
@@ -37,9 +42,9 @@ class _UpcomingMoviesViewState extends State<UpcomingMoviesView> {
             onRefresh: () => Future.sync(
               () => upcomingMoviesManager.pagingController.refresh(),
             ),
-            child: PagedListView<int, UpcomingMovieModel>(
+            child: PagedListView<int, MovieModel>(
               pagingController: upcomingMoviesManager.pagingController,
-              builderDelegate: PagedChildBuilderDelegate<UpcomingMovieModel>(
+              builderDelegate: PagedChildBuilderDelegate<MovieModel>(
                 itemBuilder: (context, item, index) => InkWell(
                   onTap: () => context.goNamed(RoutePath.movieDetails.name,
                       pathParameters: {'movie_id': item.id.toString()}),

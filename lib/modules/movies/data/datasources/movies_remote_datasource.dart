@@ -3,6 +3,7 @@ import 'package:movies_app/core/helpers/constants.dart';
 import 'package:movies_app/core/helpers/end_points.dart';
 import 'package:movies_app/core/helpers/failure.dart';
 import 'package:movies_app/modules/movies/data/models/movie_details_response.dart';
+import 'package:movies_app/modules/movies/data/models/search_movies_response.dart';
 import 'package:movies_app/modules/movies/data/models/upcoming_movies_response.dart';
 import 'package:movies_app/services/network_service.dart';
 
@@ -13,7 +14,8 @@ abstract class MoviesRemoteDatasource {
   Future<Either<MovieDetailsResponse, Failure>> fetchMovieDetails(
       {required String movieId});
 
-
+  Future<Either<SearchMovieResponse, Failure>> fetchMoviesSearchResult(
+      {required String query,required int page});
 }
 
 class MoviesRemoteDatasourceImpl implements MoviesRemoteDatasource {
@@ -23,7 +25,7 @@ class MoviesRemoteDatasourceImpl implements MoviesRemoteDatasource {
     try {
       final response = await NetworkService.get(
           url:
-              '${Constants.baseUrl}${EndPoints.ucoming}?api_key=${Constants.apiKey}&page=$page');
+              '${Constants.baseUrl}${EndPoints.movies}${EndPoints.ucoming}?api_key=${Constants.apiKey}&page=$page');
 
       if (response.statusCode >= 200 && response.statusCode < 300) {
         return Left(upcomingMoviesResponseFromJson(response.body));
@@ -42,7 +44,7 @@ class MoviesRemoteDatasourceImpl implements MoviesRemoteDatasource {
     try {
       final response = await NetworkService.get(
           url:
-              '${Constants.baseUrl}$movieId?api_key=${Constants.apiKey}&${EndPoints.appendToResponse}=${EndPoints.images},${EndPoints.videos}');
+              '${Constants.baseUrl}${EndPoints.movies}$movieId?api_key=${Constants.apiKey}&${EndPoints.appendToResponse}=${EndPoints.images}');
 
       if (response.statusCode >= 200 && response.statusCode < 300) {
         return Left(movieDetailsResponseFromJson(response.body));
@@ -54,6 +56,23 @@ class MoviesRemoteDatasourceImpl implements MoviesRemoteDatasource {
       return Right(ServerFailure(exception: Exception(e)));
     }
   }
-  
- 
+
+  @override
+  Future<Either<SearchMovieResponse, Failure>> fetchMoviesSearchResult(
+      {required String query,required int page}) async {
+    try {
+      final response = await NetworkService.get(
+          url:
+              '${Constants.baseUrl}${EndPoints.search}?query=$query&api_key=${Constants.apiKey}&page=$page');
+
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        return Left(searchMovieResponseFromJson(response.body));
+      } else {
+        return Right(
+            ServerFailure(exception: Exception(response.reasonPhrase)));
+      }
+    } on Exception catch (e) {
+      return Right(ServerFailure(exception: Exception(e)));
+    }
+  }
 }

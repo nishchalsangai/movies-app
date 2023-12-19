@@ -4,7 +4,7 @@ import 'package:movies_app/core/helpers/usecase.dart';
 import 'package:movies_app/modules/movies/data/models/upcoming_movies_response.dart';
 import 'package:movies_app/modules/movies/domain/repository/movies_repository.dart';
 
-class UpcomingMoviesUsecase extends UseCase<List<UpcomingMovieModel>, int> {
+class UpcomingMoviesUsecase extends UseCase<List<MovieModel>, int> {
   final MoviesRepository _moviesRepository;
 
   UpcomingMoviesUsecase(
@@ -12,7 +12,7 @@ class UpcomingMoviesUsecase extends UseCase<List<UpcomingMovieModel>, int> {
   );
 
   @override
-  Future<Either<List<UpcomingMovieModel>, Failure>> call(int params) async {
+  Future<Either<List<MovieModel>, Failure>> call(int params) async {
     return await _moviesRepository.getAllUpcomingMovies(params);
   }
 }

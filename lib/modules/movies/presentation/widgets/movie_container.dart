@@ -11,7 +11,7 @@ class MovieContainer extends StatelessWidget {
     required this.item,
   });
   final int index;
-  final UpcomingMovieModel item;
+  final MovieModel item;
   @override
   Widget build(BuildContext context) {
     return AspectRatio(

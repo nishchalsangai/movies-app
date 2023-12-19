@@ -14,7 +14,7 @@ class Constants {
   static double padding = 20.0;
 
   // static late List<CameraDescription> cameras;
-  static const String baseUrl = 'https://api.themoviedb.org/3/movie/';
+  static const String baseUrl = 'https://api.themoviedb.org/';
   static String apiKey = dotenv.env['API_KEY'] ?? '';
 
    static List<Color> blackShader  = [

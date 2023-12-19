@@ -17,7 +17,7 @@ class VideoRemoteDatasourceImpl implements VideoRemoteDatasource {
     try {
       final response = await NetworkService.get(
           url:
-              '${Constants.baseUrl}$movieId/${EndPoints.videos}?api_key=${Constants.apiKey}');
+              '${Constants.baseUrl}${EndPoints.movies}$movieId/${EndPoints.videos}?api_key=${Constants.apiKey}');
 
       if (response.statusCode >= 200 && response.statusCode < 300) {
         return Left(videoDetailsResponseFromJson(response.body));

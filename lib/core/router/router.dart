@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movies_app/core/helpers/constants.dart';
 import 'package:movies_app/core/router/route_path.dart';
@@ -10,9 +9,10 @@ import 'package:movies_app/modules/dashboard/views/dashboard_view.dart';
 import 'package:movies_app/modules/media_library/views/media_library_view.dart';
 import 'package:movies_app/modules/more/views/more_view.dart';
 import 'package:movies_app/modules/movies/presentation/managers/movie_details/movie_details_manager.dart';
+import 'package:movies_app/modules/movies/presentation/managers/search_movie/search_movie_manager.dart';
 import 'package:movies_app/modules/movies/presentation/views/movie_details/movie_details_view.dart';
+import 'package:movies_app/modules/movies/presentation/views/search_movie/search_movie_view.dart';
 import 'package:movies_app/modules/movies/presentation/views/upcoming_movies/upcoming_movies_view.dart';
-import 'package:movies_app/modules/video/presentation/cubit/video_cubit.dart';
 import 'package:movies_app/modules/video/presentation/views/video_view.dart';
 import 'package:provider/provider.dart';
 
@@ -43,8 +43,6 @@ CustomTransitionPage buildPageWithSlideTransition({
 }
 
 class MyRouter {
-  // late AppStateManager appService;
-
   MyRouter();
 
   late final router = GoRouter(
@@ -127,6 +125,20 @@ class MyRouter {
           return buildPageWithSlideTransition(
             child: VideoView(
               id: videoId,
+            ),
+            context: context,
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutePath.search.name,
+        path: RoutePath.search.path,
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return buildPageWithSlideTransition(
+            child: ChangeNotifierProvider(
+              create: (_) => sl<SearchMovieManager>(),
+              child: const SearchMovieView(),
             ),
             context: context,
             state: state,

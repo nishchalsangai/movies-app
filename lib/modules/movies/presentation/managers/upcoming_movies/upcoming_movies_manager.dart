@@ -11,11 +11,11 @@ import 'package:movies_app/modules/movies/domain/usecases/upcoming_movies_usecas
 class UpcomingMoviesManager extends ChangeNotifier {
   final UpcomingMoviesUsecase _upcomingMoviesUsecase;
   late bool isLoading;
-  late PagingController<int, UpcomingMovieModel> pagingController;
+  late PagingController<int, MovieModel> pagingController;
   static const pageSize = 20;
 
   UpcomingMoviesManager(this._upcomingMoviesUsecase) {
-    isLoading = false;
+    isLoading = true;
     pagingController = PagingController(firstPageKey: 1);
     pagingController.addPageRequestListener((pageKey) {
       upcomingMoviesPaginatedList(pageKey);
@@ -24,6 +24,7 @@ class UpcomingMoviesManager extends ChangeNotifier {
 
   Future<void> upcomingMoviesPaginatedList(int pageKey) async {
     try {
+     
       final result = await _upcomingMoviesUsecase.call(pageKey);
       result.fold((l) {
         final isLastPage = l.length < pageSize;
