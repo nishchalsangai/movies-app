@@ -42,12 +42,9 @@ class SearchWidget extends StatelessWidget {
           onTap: () {
             context.pop();
           },
-          child: Transform.rotate(
-              angle: math.pi / 4,
-              child: const Icon(
-                Icons.add,
-                size: 30,
-              )),
+          child: const Icon(
+            Icons.close,
+          ),
         ),
       ),
     );

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:movies_app/core/helpers/assets.dart';
 import 'package:movies_app/core/helpers/constants.dart';
-import 'package:movies_app/core/helpers/helper.dart';
+import 'package:movies_app/core/helpers/extensions.dart';
 import 'package:movies_app/core/router/route_path.dart';
 import 'package:movies_app/modules/movies/data/models/upcoming_movies_response.dart';
+import 'package:movies_app/modules/movies/domain/entity/grid_data.dart';
 import 'package:movies_app/modules/movies/presentation/managers/search_movie/search_movie_manager.dart';
-import 'package:movies_app/modules/movies/presentation/widgets/movie_container.dart';
+import 'package:movies_app/modules/movies/presentation/widgets/grid_category_card.dart';
 import 'package:movies_app/modules/movies/presentation/widgets/search_card.dart';
 import 'package:movies_app/modules/movies/presentation/widgets/search_widget.dart';
 import 'package:provider/provider.dart';
@@ -44,6 +46,29 @@ class _SearchMovieViewState extends State<SearchMovieView> {
             child: PagedListView<int, MovieModel>(
               pagingController: searchMovieManager.pagingController,
               builderDelegate: PagedChildBuilderDelegate<MovieModel>(
+                noItemsFoundIndicatorBuilder: (context) {
+                  return SizedBox(
+                    height: context.height,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 30),
+                      child: GridView.builder(
+                        shrinkWrap: true,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                childAspectRatio: 1.9,
+                                mainAxisSpacing: 20,
+                                crossAxisSpacing: 20),
+                        itemCount: gridValues.length,
+                        itemBuilder: (context, index) {
+                          return GridCategoryCard(
+                            index: index,
+                          );
+                        },
+                      ),
+                    ),
+                  );
+                },
                 itemBuilder: (context, item, index) => InkWell(
                   onTap: () => context.goNamed(RoutePath.movieDetails.name,
                       pathParameters: {'movie_id': item.id.toString()}),
