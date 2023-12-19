@@ -4,7 +4,6 @@ import 'package:movies_app/core/helpers/assets.dart';
 import 'package:movies_app/core/helpers/constants.dart';
 import 'package:movies_app/core/router/route_path.dart';
 
-
 class BottomNavigationItem {
   String name;
   String icon;
@@ -25,13 +24,15 @@ class BottomNavigationManager extends ChangeNotifier {
         name: "Dashboard",
         icon: Assets.dashIcon,
         onTap: () {
-          Constants.shellNavigatorKey.currentContext!.goNamed(RoutePath.dashboard.name);
+          Constants.shellNavigatorKey.currentContext!
+              .goNamed(RoutePath.dashboard.name);
         }),
     BottomNavigationItem(
         name: "Watch",
         icon: Assets.watchIcon,
         onTap: () {
-          Constants.shellNavigatorKey.currentContext!.goNamed(RoutePath.upcomingMovies.name);
+          Constants.shellNavigatorKey.currentContext!
+              .goNamed(RoutePath.upcomingMovies.name);
         }),
     BottomNavigationItem(
         name: "Media",
@@ -44,9 +45,13 @@ class BottomNavigationManager extends ChangeNotifier {
         name: "More",
         icon: Assets.moreIcon,
         onTap: () {
-          Constants.shellNavigatorKey.currentContext!.goNamed(RoutePath.more.name);
+          Constants.shellNavigatorKey.currentContext!
+              .goNamed(RoutePath.more.name);
         }),
   ];
+  // BottomNavigationManager() {
+  //   navigateToIndex(1);
+  // }
 
   void navigateToIndex(index) {
     _selectedIndex = index;
@@ -54,12 +59,9 @@ class BottomNavigationManager extends ChangeNotifier {
     notifyListeners();
   }
 
-  
-
   int get selectedIndex => _selectedIndex;
 
   List<BottomNavigationItem> get menuItems => _menuItems;
 
   GlobalKey<ScaffoldState> get scaffoldKey => _scaffoldKey;
-
 }

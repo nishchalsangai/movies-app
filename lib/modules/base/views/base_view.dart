@@ -55,42 +55,62 @@ class _BaseViewState extends State<BaseView> {
     return Consumer<BottomNavigationManager>(
         builder: (context, bottomNavigationManager, _) {
       return Scaffold(
-        // extendBody: true,
-        bottomNavigationBar: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 100),
-          reverseDuration: const Duration(milliseconds: 100),
-          child: showBottomBar
-              ? BottomNavigationBar(
-                  elevation: 25,
-                  onTap: (index) {
-                    bottomNavigationManager.navigateToIndex(index);
-                  },
-                  backgroundColor: AppTheme.primaryColor,
-                  selectedItemColor: Theme.of(context).primaryColor,
-                  unselectedItemColor: const Color(0xff9E9E9E),
-                  type: BottomNavigationBarType.fixed,
-                  items: bottomNavigationManager.menuItems
-                      .map(
-                        (BottomNavigationItem menuItem) =>
-                            BottomNavigationBarItem(
-                          icon: Image.asset(
-                            menuItem.icon,
-                            color: bottomNavigationManager.selectedIndex ==
-                                    bottomNavigationManager.menuItems
-                                        .indexOf(menuItem)
-                                ? Colors.white
-                                : AppTheme.greyColorLight,
-                          ),
-                          label: menuItem.name,
-                        ),
-                      )
-                      .toList(),
-                )
-              : const SizedBox(),
+        bottomNavigationBar: ClipRRect(
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(27)),
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 100),
+            reverseDuration: const Duration(milliseconds: 100),
+            child: showBottomBar
+                ? SizedBox(
+                    height: 120,
+                    child: BottomNavigationBar(
+                      onTap: (index) {
+                        bottomNavigationManager.navigateToIndex(index);
+                      },
+                      backgroundColor: AppTheme.primaryColor,
+                      currentIndex: bottomNavigationManager.selectedIndex,
+                      selectedItemColor: Colors.white,
+                      unselectedItemColor: AppTheme.bodyTextColor,
+                      selectedFontSize: 12,
+                      type: BottomNavigationBarType.fixed,
+                      selectedLabelStyle: TextStyle(color: Colors.black),
+                      unselectedLabelStyle:
+                          const TextStyle(color: AppTheme.bodyTextColor),
+                      items: bottomNavigationManager.menuItems
+                          .map(
+                            (BottomNavigationItem menuItem) =>
+                                BottomNavigationBarItem(
+                                    icon: ColorFiltered(
+                                      colorFilter: ColorFilter.mode(
+                                        bottomNavigationManager.selectedIndex ==
+                                                bottomNavigationManager
+                                                    .menuItems
+                                                    .indexOf(menuItem)
+                                            ? Colors.white
+                                            : AppTheme.greyColorLight
+                                                .withOpacity(0.3),
+                                        BlendMode.srcATop,
+                                      ),
+                                      child: Image.asset(
+                                        menuItem.icon,
+                                        height: 24,
+                                        width: 24,
+                                      ),
+                                    ),
+                                    label: menuItem.name,
+                                    activeIcon:
+                                        bottomNavigationManager.selectedIndex ==
+                                                3
+                                            ? const Icon(Icons.list)
+                                            : null),
+                          )
+                          .toList(),
+                    ),
+                  )
+                : const SizedBox(),
+          ),
         ),
-        body: PageStorage(
-            bucket: bucket,
-            child: widget.child), //widgetOptions[_selectedIndex]
+        body: PageStorage(bucket: bucket, child: widget.child),
       );
     });
   }
