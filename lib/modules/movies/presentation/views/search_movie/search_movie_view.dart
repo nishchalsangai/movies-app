@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:movies_app/core/helpers/assets.dart';
 import 'package:movies_app/core/helpers/constants.dart';
 import 'package:movies_app/core/helpers/extensions.dart';
 import 'package:movies_app/core/router/route_path.dart';

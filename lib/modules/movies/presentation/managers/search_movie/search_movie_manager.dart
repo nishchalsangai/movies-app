@@ -21,8 +21,15 @@ class SearchMovieManager extends ChangeNotifier {
     controller = TextEditingController();
     controller.addListener(() {
       Debouncer(milliseconds: 500).run(() {
-        pagingController.refresh();
-        searhMovieQuery(controller.text, 1);
+        if (controller.text.isNotEmpty) {
+          pagingController.refresh();
+          searhMovieQuery(controller.text, 1);
+        } else {
+          if (pagingController.itemList != null &&
+              pagingController.itemList!.isNotEmpty) {
+            pagingController.itemList = null;
+          }
+        }
       });
     });
     pagingController.addPageRequestListener((pageKey) {
