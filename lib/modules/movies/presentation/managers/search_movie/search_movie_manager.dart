@@ -16,11 +16,12 @@ class SearchMovieManager extends ChangeNotifier {
   late TextEditingController controller;
   static const pageSize = 20;
   SearchMovieManager(this.searchMoviesUsecase) {
-    isLoading = false;
+    isLoading = true;
     pagingController = PagingController(firstPageKey: 1);
     controller = TextEditingController();
     controller.addListener(() {
       Debouncer(milliseconds: 500).run(() {
+        pagingController.refresh();
         searhMovieQuery(controller.text, 1);
       });
     });
@@ -31,7 +32,6 @@ class SearchMovieManager extends ChangeNotifier {
 
   void searhMovieQuery(String query, int pageKey) async {
     try {
-      toggleLoading(true);
       final result =
           await searchMoviesUsecase.call(SearchEntity(query, pageKey));
       result.fold((l) {
