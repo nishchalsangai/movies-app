@@ -31,6 +31,11 @@ class RoutePath {
  
   );
 
+  static RouteName date = RouteName(
+    'date',
+ 
+  );
+
 
   static RouteName more = RouteName(
     'more',

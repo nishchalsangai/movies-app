@@ -209,7 +209,7 @@ extension DateExtensions on DateTime {
   }
 
   String toDay() {
-    return DateFormat('E').format(this);
+    return DateFormat('dd MMM').format(this);
   }
 
   String toDayMonthYearTime() {

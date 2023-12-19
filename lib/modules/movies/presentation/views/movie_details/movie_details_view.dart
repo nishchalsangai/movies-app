@@ -83,7 +83,17 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
                                           .movieDetails!.releaseDate!
                                           .toDayMonthYear()
                                       : '',
-                                  getTicketsCallBack: () {},
+                                  getTicketsCallBack: () {
+                                    context.pushNamed(RoutePath.date.name,
+                                        queryParameters: {
+                                          'title': movieDetailsManager
+                                                  .movieDetails!
+                                                  .originalTitle ??
+                                              '',
+                                          'subTitle':
+                                              'In Theaters ${movieDetailsManager.movieDetails!.releaseDate != null ? movieDetailsManager.movieDetails!.releaseDate!.toDayMonthYear() : ''}'
+                                        });
+                                  },
                                   watchTrailerCallBack: () {
                                     context.pushNamed(RoutePath.video.name,
                                         pathParameters: {
