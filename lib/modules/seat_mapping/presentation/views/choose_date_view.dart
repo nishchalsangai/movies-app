@@ -151,27 +151,27 @@ class _ChooseDateViewState extends State<ChooseDateView> {
                               height: 10,
                             ),
                             RichText(
-                              text: const TextSpan(
+                              text: TextSpan(
                                 text: 'From ',
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontWeight: FontWeight.w400,
                                     color: AppTheme.bodyTextColor),
                                 children: [
                                   TextSpan(
-                                    text: '50\$',
-                                    style: TextStyle(
+                                    text: '${50 + (index * 10)}\$',
+                                    style: const TextStyle(
                                         fontWeight: FontWeight.w600,
                                         color: Colors.black),
                                   ),
-                                  TextSpan(
+                                  const TextSpan(
                                     text: ' or ',
                                     style: TextStyle(
                                         fontWeight: FontWeight.w400,
                                         color: AppTheme.bodyTextColor),
                                   ),
                                   TextSpan(
-                                    text: '2500 bonus',
-                                    style: TextStyle(
+                                    text: '${2500 + (index * 500)} bonus',
+                                    style: const TextStyle(
                                         fontWeight: FontWeight.w600,
                                         color: Colors.black),
                                   ),
