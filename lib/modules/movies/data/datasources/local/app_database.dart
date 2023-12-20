@@ -7,7 +7,7 @@ import 'package:sqflite/sqflite.dart' as sqflite;
 
 part 'app_database.g.dart';
 
-@TypeConverters([IntListConverter,DateTimeConverter])
+@TypeConverters([IntListConverter, DateTimeConverter])
 @Database(version: 1, entities: [MovieModel])
 abstract class AppDatabase extends FloorDatabase {
   MoviesLocalDatasource get moviesDAO;

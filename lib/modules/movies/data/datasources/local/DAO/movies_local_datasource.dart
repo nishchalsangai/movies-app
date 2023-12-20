@@ -9,6 +9,7 @@ abstract class MoviesLocalDatasource {
   @Query('SELECT id FROM movies')
   Future<List<int>> getAllMovieIds();
 
+
   @insert
   Future<void> saveUpcomingMoviesList(List<MovieModel> movies);
 }

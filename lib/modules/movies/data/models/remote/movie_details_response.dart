@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:floor/floor.dart';
+// import 'package:floor/floor.dart';
 
 MovieDetailsResponse movieDetailsResponseFromJson(String str) => MovieDetailsResponse.fromJson(json.decode(str));
 
