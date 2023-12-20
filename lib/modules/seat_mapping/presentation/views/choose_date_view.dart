@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:movies_app/core/helpers/app_theme.dart';
 import 'package:movies_app/core/helpers/assets.dart';
 import 'package:movies_app/core/helpers/extensions.dart';
+import 'package:movies_app/core/router/route_path.dart';
 
 class ChooseDateView extends StatefulWidget {
   const ChooseDateView(
@@ -192,7 +194,12 @@ class _ChooseDateViewState extends State<ChooseDateView> {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(26),
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            context.pushNamed(RoutePath.seatMapping.name, queryParameters: {
+              'title': widget.title,
+              'subTitle': 'March 5, 2021  |  12:30 hall 1'
+            });
+          },
           style: AppTheme.styleFrom2,
           child: Text(
             'Select Seats',

@@ -19,4 +19,5 @@ class Assets {
   static const scifi = 'assets/images/scifi.png';
   static const thriller = 'assets/images/thriller.png';
   static const seat = 'assets/images/seat.png';
+  static const ellipse = 'assets/images/ellipse.png';
 }

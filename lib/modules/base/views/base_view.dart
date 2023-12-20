@@ -65,7 +65,7 @@ class _BaseViewState extends State<BaseView> {
                     height: 120,
                     child: BottomNavigationBar(
                       onTap: (index) {
-                        bottomNavigationManager.navigateToIndex(index);
+                        // bottomNavigationManager.navigateToIndex(index);
                       },
                       backgroundColor: AppTheme.primaryColor,
                       currentIndex: bottomNavigationManager.selectedIndex,
@@ -73,7 +73,7 @@ class _BaseViewState extends State<BaseView> {
                       unselectedItemColor: AppTheme.bodyTextColor,
                       selectedFontSize: 12,
                       type: BottomNavigationBarType.fixed,
-                      selectedLabelStyle: TextStyle(color: Colors.black),
+                      selectedLabelStyle: const TextStyle(color: Colors.black),
                       unselectedLabelStyle:
                           const TextStyle(color: AppTheme.bodyTextColor),
                       items: bottomNavigationManager.menuItems

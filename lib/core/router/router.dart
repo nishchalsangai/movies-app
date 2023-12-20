@@ -14,6 +14,7 @@ import 'package:movies_app/modules/movies/presentation/views/movie_details/movie
 import 'package:movies_app/modules/movies/presentation/views/search_movie/search_movie_view.dart';
 import 'package:movies_app/modules/movies/presentation/views/upcoming_movies/upcoming_movies_view.dart';
 import 'package:movies_app/modules/seat_mapping/presentation/views/choose_date_view.dart';
+import 'package:movies_app/modules/seat_mapping/presentation/views/seat_mapping_view.dart';
 import 'package:movies_app/modules/video/presentation/views/video_view.dart';
 import 'package:provider/provider.dart';
 
@@ -154,6 +155,22 @@ class MyRouter {
           final subTitle = state.queryParameters['subTitle'] ?? '';
           return buildPageWithSlideTransition(
             child: ChooseDateView(
+              title: title,
+              subtitle: subTitle,
+            ),
+            context: context,
+            state: state,
+          );
+        },
+      ),
+         GoRoute(
+        name: RoutePath.seatMapping.name,
+        path: RoutePath.seatMapping.path,
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          final title = state.queryParameters['title'] ?? '';
+          final subTitle = state.queryParameters['subTitle'] ?? '';
+          return buildPageWithSlideTransition(
+            child: SeatMappingView(
               title: title,
               subtitle: subTitle,
             ),
