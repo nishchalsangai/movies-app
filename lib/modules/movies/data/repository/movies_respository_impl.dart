@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:movies_app/core/helpers/failure.dart';
-import 'package:movies_app/modules/movies/data/datasources/local/DAO/movies_local_datasource.dart';
 import 'package:movies_app/modules/movies/data/datasources/local/app_database.dart';
 import 'package:movies_app/modules/movies/data/datasources/movies_remote_datasource.dart';
 import 'package:movies_app/modules/movies/data/models/remote/movie_details_response.dart';
