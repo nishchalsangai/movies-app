@@ -4,6 +4,7 @@ import 'package:movies_app/core/helpers/app_theme.dart';
 import 'package:movies_app/core/helpers/assets.dart';
 import 'package:movies_app/core/helpers/extensions.dart';
 import 'package:movies_app/core/router/route_path.dart';
+import 'package:movies_app/core/widgets/app_barx.dart';
 
 class ChooseDateView extends StatefulWidget {
   const ChooseDateView(
@@ -27,24 +28,9 @@ class _ChooseDateViewState extends State<ChooseDateView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          widget.title,
-          style: AppTheme.title,
-        ),
-        bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(20),
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 15),
-              child: Align(
-                alignment: Alignment.topCenter,
-                child: Text(
-                  widget.subtitle,
-                  style:
-                      const TextStyle(color: AppTheme.nearyBlue, fontSize: 12),
-                ),
-              ),
-            )),
+      appBar: AppBarX(
+        title: widget.title,
+        subtitle: widget.subtitle,
       ),
       body: SingleChildScrollView(
         child: Column(

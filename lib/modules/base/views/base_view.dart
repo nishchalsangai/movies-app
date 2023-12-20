@@ -62,7 +62,7 @@ class _BaseViewState extends State<BaseView> {
             reverseDuration: const Duration(milliseconds: 100),
             child: showBottomBar
                 ? SizedBox(
-                    height: 120,
+                    height: 80,
                     child: BottomNavigationBar(
                       onTap: (index) {
                         // bottomNavigationManager.navigateToIndex(index);

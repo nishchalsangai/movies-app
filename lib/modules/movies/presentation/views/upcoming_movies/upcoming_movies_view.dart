@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:movies_app/core/helpers/constants.dart';
+import 'package:movies_app/core/helpers/extensions.dart';
 import 'package:movies_app/core/router/route_path.dart';
 import 'package:movies_app/modules/movies/data/models/upcoming_movies_response.dart';
 import 'package:movies_app/modules/movies/presentation/managers/upcoming_movies/upcoming_movies_manager.dart';
@@ -20,7 +21,11 @@ class _UpcomingMoviesViewState extends State<UpcomingMoviesView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Watch'),
+        title: Text(
+          'Watch',
+          style: context.textTheme.titleMedium!
+              .copyWith(fontWeight: FontWeight.w600),
+        ),
         centerTitle: false,
         actions: [
           IconButton(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/core/helpers/app_theme.dart';
 import 'package:movies_app/core/helpers/assets.dart';
 import 'package:movies_app/core/helpers/extensions.dart';
+import 'package:movies_app/core/widgets/app_barx.dart';
 import 'package:movies_app/modules/seat_mapping/domain/entity/seat_entity.dart';
 import 'package:movies_app/modules/seat_mapping/presentation/widgets/seat_legends.dart';
 
@@ -69,25 +70,7 @@ class _SeatMappingViewState extends State<SeatMappingView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppTheme.chipBackground,
-      appBar: AppBar(
-        title: Text(
-          widget.title,
-          style: AppTheme.title,
-        ),
-        bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(20),
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 15),
-              child: Align(
-                alignment: Alignment.topCenter,
-                child: Text(
-                  widget.subtitle,
-                  style:
-                      const TextStyle(color: AppTheme.nearyBlue, fontSize: 12),
-                ),
-              ),
-            )),
-      ),
+      appBar: AppBarX(title: widget.title,subtitle: widget.subtitle,),
       body: Column(
         children: [
           Expanded(
@@ -391,3 +374,5 @@ class _SeatMappingViewState extends State<SeatMappingView> {
             (index == 23 && (subIndex >= 0 && subIndex < 4)));
   }
 }
+
+

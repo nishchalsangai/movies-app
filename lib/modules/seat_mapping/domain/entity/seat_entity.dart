@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 
 enum SeatType { selected, notAvailable, vip, regular }
 
+// ignore: must_be_immutable
 class SeatEntity extends Equatable {
   int colx;
   int rowx;

@@ -8,6 +8,7 @@ import 'package:movies_app/core/helpers/image_file.dart';
 import 'package:movies_app/core/router/route_path.dart';
 import 'package:movies_app/core/widgets/error_view.dart';
 import 'package:movies_app/core/widgets/image_with_loader.dart';
+import 'package:movies_app/core/widgets/loading.dart';
 import 'package:movies_app/modules/movies/presentation/managers/movie_details/movie_details_manager.dart';
 import 'package:movies_app/modules/movies/presentation/widgets/genre_widget.dart';
 import 'package:movies_app/modules/movies/presentation/widgets/movie_cta_widget.dart';
@@ -34,7 +35,7 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
     return Consumer<MovieDetailsManager>(
         builder: (context, movieDetailsManager, child) {
       return movieDetailsManager.isLoading
-          ? const CircularProgressIndicator.adaptive()
+          ? const Loading()
           : movieDetailsManager.movieDetails == null
               ? const ErrorView()
               : Scaffold(
@@ -158,6 +159,8 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
     });
   }
 }
+
+
 
 class OverviewWidget extends StatelessWidget {
   const OverviewWidget({super.key, required this.overview});
