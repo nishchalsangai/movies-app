@@ -1,11 +1,9 @@
-import 'dart:developer';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:movies_app/core/helpers/app_theme.dart';
 import 'package:movies_app/core/helpers/assets.dart';
 import 'package:movies_app/core/helpers/extensions.dart';
 import 'package:movies_app/modules/seat_mapping/domain/entity/seat_entity.dart';
+import 'package:movies_app/modules/seat_mapping/presentation/widgets/seat_legends.dart';
 
 class SeatMappingView extends StatefulWidget {
   const SeatMappingView(
@@ -146,8 +144,8 @@ class _SeatMappingViewState extends State<SeatMappingView> {
                                             if (!seatMaker(subIndex, index)) {
                                               seatValue = seats.firstWhere(
                                                 (element) =>
-                                                    element.row == index &&
-                                                    element.col == subIndex,
+                                                    element.colx == index &&
+                                                    element.rowx == subIndex,
                                               );
                                             }
 
@@ -161,41 +159,15 @@ class _SeatMappingViewState extends State<SeatMappingView> {
                                                   : InkWell(
                                                       onTap: seatValue!
                                                               .available
-                                                          ? () {
-                                                              setState(() {
-                                                                if (selectedSeats
-                                                                    .contains(
-                                                                        seatValue)) {
-                                                                  selectedSeats
-                                                                      .remove(
-                                                                          seatValue);
-                                                                } else {
-                                                                  selectedSeats.add(
-                                                                      seatValue!);
-                                                                }
-                                                              });
-                                                            }
+                                                          ? () =>
+                                                              updateSelectedSeats(
+                                                                  seatValue)
                                                           : null,
                                                       child: Container(
                                                         height: 7,
                                                         width: 7,
-                                                        color: selectedSeats
-                                                                .contains(
-                                                                    seatValue)
-                                                            ? AppTheme
-                                                                .vibrantMustard
-                                                            : seatValue.seatType ==
-                                                                    SeatType
-                                                                        .regular
-                                                                ? AppTheme
-                                                                    .nearyBlue
-                                                                : seatValue.seatType ==
-                                                                        SeatType
-                                                                            .vip
-                                                                    ? AppTheme
-                                                                        .vibrantPurple
-                                                                    : AppTheme
-                                                                        .greyColor,
+                                                        color: selectedColor(
+                                                            seatValue),
                                                       ),
                                                     ),
                                             );
@@ -291,52 +263,52 @@ class _SeatMappingViewState extends State<SeatMappingView> {
                     spacing: 10,
                     children: [
                       ...List.generate(
-                          selectedSeats.length,
-                          (index) => Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 12, vertical: 6),
-                                decoration: BoxDecoration(
-                                    color: AppTheme.greyColor.withOpacity(0.1),
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    RichText(
-                                      text: TextSpan(
-                                          text:
-                                              '${selectedSeats[index].col} / ',
-                                          children: [
-                                            TextSpan(
-                                                text:
-                                                    '${selectedSeats[index].row} row',
-                                                style: const TextStyle(
-                                                    fontSize: 10,
-                                                    fontWeight: FontWeight.w400,
-                                                    color: Colors.black))
-                                          ],
-                                          style: const TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w400,
-                                              color: Colors.black)),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          selectedSeats
-                                              .remove(selectedSeats[index]);
-                                        });
-                                      },
-                                      child: const Icon(
-                                        Icons.close,
-                                        size: 14,
-                                      ),
-                                    ),
-                                  ],
+                        selectedSeats.length,
+                        (index) {
+                          return Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 6),
+                            decoration: AppTheme.boxDecoration,
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                RichText(
+                                  text: TextSpan(
+                                      text: '${selectedSeats[index].colx} / ',
+                                      children: [
+                                        TextSpan(
+                                            text:
+                                                '${selectedSeats[index].rowx} row',
+                                            style: const TextStyle(
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.w400,
+                                                color: Colors.black))
+                                      ],
+                                      style: const TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.black)),
                                 ),
-                              ))
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      selectedSeats
+                                          .remove(selectedSeats[index]);
+                                    });
+                                  },
+                                  child: const Icon(
+                                    Icons.close,
+                                    size: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      )
                     ],
                   )
                 ],
@@ -355,9 +327,7 @@ class _SeatMappingViewState extends State<SeatMappingView> {
                 Container(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 12, vertical: 11),
-                  decoration: BoxDecoration(
-                      color: AppTheme.greyColor.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(10)),
+                  decoration: AppTheme.boxDecoration,
                   child: Column(
                     children: [
                       Text(
@@ -394,44 +364,30 @@ class _SeatMappingViewState extends State<SeatMappingView> {
     );
   }
 
+  void updateSelectedSeats(SeatEntity? seatValue) {
+    setState(() {
+      if (selectedSeats.contains(seatValue)) {
+        selectedSeats.remove(seatValue);
+      } else {
+        selectedSeats.add(seatValue!);
+      }
+    });
+  }
+
+  Color selectedColor(SeatEntity seatValue) {
+    return selectedSeats.contains(seatValue)
+        ? AppTheme.vibrantMustard
+        : seatValue.seatType == SeatType.regular
+            ? AppTheme.nearyBlue
+            : seatValue.seatType == SeatType.vip
+                ? AppTheme.vibrantPurple
+                : AppTheme.greyColor;
+  }
+
   bool seatMaker(int subIndex, int index) {
     return (subIndex == 0 && (index >= 0 && index < 3) ||
             (subIndex == 0 && (index <= 24 && index > 21))) ||
         ((index == 0 && (subIndex >= 0 && subIndex < 4)) ||
             (index == 23 && (subIndex >= 0 && subIndex < 4)));
-  }
-}
-
-class SeatLegends extends StatelessWidget {
-  const SeatLegends({
-    super.key,
-    required this.color,
-    required this.title,
-  });
-  final Color color;
-  final String title;
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Container(
-          height: 20,
-          width: 20,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(3),
-            color: color,
-          ),
-        ),
-        const SizedBox(
-          width: 20,
-        ),
-        Text(
-          title,
-          style: const TextStyle(fontSize: 12, color: AppTheme.bodyTextColor),
-        ),
-      ],
-    );
   }
 }

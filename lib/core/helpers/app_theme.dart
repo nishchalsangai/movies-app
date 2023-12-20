@@ -28,6 +28,10 @@ class AppTheme {
 
   static const randomColor = [vibrantGreen,vibrantPink,vibrantPurple,vibrantMustard];
 
+  static var boxDecoration = BoxDecoration(
+                              color: AppTheme.greyColor.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(10));
+
   static final ThemeData lightTheme = ThemeData(
     primaryColor: primaryColor,
     // fontFamily: 'Metropolis',
