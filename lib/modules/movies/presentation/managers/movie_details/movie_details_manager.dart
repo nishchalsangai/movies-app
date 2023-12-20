@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/core/helpers/failure.dart';
 import 'package:movies_app/core/helpers/toast.dart';
-import 'package:movies_app/modules/movies/data/models/movie_details_response.dart';
+import 'package:movies_app/modules/movies/data/models/remote/movie_details_response.dart';
 import 'package:movies_app/modules/movies/domain/usecases/movie_details_usecase.dart';
 
 class MovieDetailsManager extends ChangeNotifier {

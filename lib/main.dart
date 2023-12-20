@@ -27,11 +27,11 @@ void main() async {
       MultiProvider(
         providers: [
           Provider<MyRouter>(
-            create: (_) => MyRouter(),
+            create: (_) => sl<MyRouter>(),
           ),
           ChangeNotifierProvider(
             lazy: false,
-            create: (_) => BottomNavigationManager(),
+            create: (_) =>  sl<BottomNavigationManager>(),
           ),
           ChangeNotifierProvider(
             lazy: false,

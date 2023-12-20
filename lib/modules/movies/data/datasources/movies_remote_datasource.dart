@@ -2,9 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:movies_app/core/helpers/constants.dart';
 import 'package:movies_app/core/helpers/end_points.dart';
 import 'package:movies_app/core/helpers/failure.dart';
-import 'package:movies_app/modules/movies/data/models/movie_details_response.dart';
-import 'package:movies_app/modules/movies/data/models/search_movies_response.dart';
-import 'package:movies_app/modules/movies/data/models/upcoming_movies_response.dart';
+import 'package:movies_app/modules/movies/data/models/remote/movie_details_response.dart';
+import 'package:movies_app/modules/movies/data/models/remote/search_movies_response.dart';
+import 'package:movies_app/modules/movies/data/models/remote/upcoming_movies_response.dart';
 import 'package:movies_app/services/network_service.dart';
 
 abstract class MoviesRemoteDatasource {

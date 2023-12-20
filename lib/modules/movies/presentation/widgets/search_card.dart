@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/core/helpers/app_theme.dart';
 import 'package:movies_app/core/helpers/constants.dart';
 import 'package:movies_app/core/helpers/image_file.dart';
-import 'package:movies_app/modules/movies/data/models/upcoming_movies_response.dart';
+import 'package:movies_app/modules/movies/data/models/remote/upcoming_movies_response.dart';
 
 class SearchCard extends StatelessWidget {
   const SearchCard({super.key, required this.movie});

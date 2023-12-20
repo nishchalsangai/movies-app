@@ -4,7 +4,7 @@ import 'package:movies_app/core/helpers/constants.dart';
 import 'package:movies_app/core/helpers/extensions.dart';
 import 'package:movies_app/core/helpers/image_file.dart';
 import 'package:movies_app/core/widgets/image_with_loader.dart';
-import 'package:movies_app/modules/movies/data/models/movie_details_response.dart';
+import 'package:movies_app/modules/movies/data/models/remote/movie_details_response.dart';
 
 class PhotosSlider extends StatefulWidget {
   const PhotosSlider({

@@ -1,5 +1,6 @@
 import 'package:movies_app/dependency_injection.dart';
-import 'package:movies_app/modules/movies/data/datasources/movies_local_datasource.dart';
+import 'package:movies_app/modules/movies/data/datasources/local/DAO/movies_local_datasource.dart';
+import 'package:movies_app/modules/movies/data/datasources/local/app_database.dart';
 import 'package:movies_app/modules/movies/data/datasources/movies_remote_datasource.dart';
 import 'package:movies_app/modules/movies/data/repository/movies_respository_impl.dart';
 import 'package:movies_app/modules/movies/domain/repository/movies_repository.dart';
@@ -11,8 +12,7 @@ import 'package:movies_app/modules/movies/presentation/managers/search_movie/sea
 import 'package:movies_app/modules/movies/presentation/managers/upcoming_movies/upcoming_movies_manager.dart';
 
 Future<void> movieInjector() async {
-  sl.registerLazySingleton<MoviesLocalDatasource>(
-      () => MoviesLocalDatasourceImpl());
+ 
   sl.registerLazySingleton<MoviesRemoteDatasource>(
       () => MoviesRemoteDatasourceImpl());
 
@@ -20,13 +20,14 @@ Future<void> movieInjector() async {
       () => MovieDetailsUsecase(sl()));
   sl.registerLazySingleton<UpcomingMoviesUsecase>(
       () => UpcomingMoviesUsecase(sl()));
-       sl.registerLazySingleton<SearchMoviesUsecase>(
+  sl.registerLazySingleton<SearchMoviesUsecase>(
       () => SearchMoviesUsecase(sl()));
 
   sl.registerLazySingleton<MoviesRepository>(
-      () => MoviesRespositoryImpl(sl(), sl()));
+      () => MoviesRespositoryImpl(sl(), sl(),sl()));
 
   sl.registerFactory<UpcomingMoviesManager>(() => UpcomingMoviesManager(sl()));
-   sl.registerFactory<SearchMovieManager>(() => SearchMovieManager(sl()));
-  sl.registerFactoryParam<MovieDetailsManager,String,String?>((movieId,_) => MovieDetailsManager(sl(),movieId));
+  sl.registerFactory<SearchMovieManager>(() => SearchMovieManager(sl()));
+  sl.registerFactoryParam<MovieDetailsManager, String, String?>(
+      (movieId, _) => MovieDetailsManager(sl(), movieId));
 }

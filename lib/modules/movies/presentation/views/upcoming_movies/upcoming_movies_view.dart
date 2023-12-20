@@ -4,7 +4,7 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:movies_app/core/helpers/constants.dart';
 import 'package:movies_app/core/helpers/extensions.dart';
 import 'package:movies_app/core/router/route_path.dart';
-import 'package:movies_app/modules/movies/data/models/upcoming_movies_response.dart';
+import 'package:movies_app/modules/movies/data/models/remote/upcoming_movies_response.dart';
 import 'package:movies_app/modules/movies/presentation/managers/upcoming_movies/upcoming_movies_manager.dart';
 import 'package:movies_app/modules/movies/presentation/widgets/movie_container.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +20,7 @@ class _UpcomingMoviesViewState extends State<UpcomingMoviesView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: Text(
           'Watch',

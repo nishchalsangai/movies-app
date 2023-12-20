@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:movies_app/modules/movies/data/models/upcoming_movies_response.dart';
+import 'package:movies_app/modules/movies/data/models/remote/upcoming_movies_response.dart';
 
 SearchMovieResponse searchMovieResponseFromJson(String str) =>
     SearchMovieResponse.fromJson(json.decode(str));

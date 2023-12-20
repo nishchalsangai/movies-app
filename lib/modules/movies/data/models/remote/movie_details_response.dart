@@ -1,13 +1,12 @@
-// To parse this JSON data, do
-//
-//     final movieDetailsResponse = movieDetailsResponseFromJson(jsonString);
-
 import 'dart:convert';
+
+import 'package:floor/floor.dart';
 
 MovieDetailsResponse movieDetailsResponseFromJson(String str) => MovieDetailsResponse.fromJson(json.decode(str));
 
 String movieDetailsResponseToJson(MovieDetailsResponse data) => json.encode(data.toJson());
 
+// @Entity(tableName: 'details', primaryKeys: ['id'])
 class MovieDetailsResponse {
     bool? adult;
     String? backdropPath;

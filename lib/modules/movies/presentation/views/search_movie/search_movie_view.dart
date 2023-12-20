@@ -4,7 +4,7 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:movies_app/core/helpers/constants.dart';
 import 'package:movies_app/core/helpers/extensions.dart';
 import 'package:movies_app/core/router/route_path.dart';
-import 'package:movies_app/modules/movies/data/models/upcoming_movies_response.dart';
+import 'package:movies_app/modules/movies/data/models/remote/upcoming_movies_response.dart';
 import 'package:movies_app/modules/movies/domain/entity/grid_data.dart';
 import 'package:movies_app/modules/movies/presentation/managers/search_movie/search_movie_manager.dart';
 import 'package:movies_app/modules/movies/presentation/widgets/grid_category_card.dart';

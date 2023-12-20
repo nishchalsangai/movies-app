@@ -1,9 +1,9 @@
 import 'dart:convert';
+import 'package:floor/floor.dart';
+import 'package:movies_app/core/helpers/dao_helpers.dart';
 
 UpcomingMoviesResponse upcomingMoviesResponseFromJson(String str) =>
     UpcomingMoviesResponse.fromJson(json.decode(str));
-
-
 
 class UpcomingMoviesResponse {
   Dates dates;
@@ -44,8 +44,6 @@ class UpcomingMoviesResponse {
         totalPages: json["total_pages"],
         totalResults: json["total_results"],
       );
-
-  
 }
 
 class Dates {
@@ -79,6 +77,8 @@ class Dates {
       };
 }
 
+@Entity(tableName: 'movies', primaryKeys: ['id'])
+@TypeConverters([IntListConverter,DateTimeConverter])
 class MovieModel {
   bool adult;
   String? backdropPath;

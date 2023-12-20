@@ -39,6 +39,7 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
           : movieDetailsManager.movieDetails == null
               ? const ErrorView()
               : Scaffold(
+                  extendBodyBehindAppBar: true,
                   extendBody: true,
                   body: CustomScrollView(
                     slivers: [
@@ -159,8 +160,6 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
     });
   }
 }
-
-
 
 class OverviewWidget extends StatelessWidget {
   const OverviewWidget({super.key, required this.overview});

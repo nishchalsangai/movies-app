@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/core/helpers/app_theme.dart';
 import 'package:movies_app/core/helpers/constants.dart';
 import 'package:movies_app/core/helpers/image_file.dart';
-import 'package:movies_app/modules/movies/data/models/upcoming_movies_response.dart';
+import 'package:movies_app/core/widgets/image_with_loader.dart';
+import 'package:movies_app/modules/movies/data/models/remote/upcoming_movies_response.dart';
 
 class MovieContainer extends StatelessWidget {
   const MovieContainer({
@@ -17,6 +18,7 @@ class MovieContainer extends StatelessWidget {
     return AspectRatio(
       aspectRatio: 16 / 9,
       child: Container(
+        clipBehavior: Clip.hardEdge,
         margin: EdgeInsets.only(
           top: index == 0 ? 20 : 0,
           bottom: 20,
@@ -38,15 +40,19 @@ class MovieContainer extends StatelessWidget {
                     .createShader(bounds);
               },
               child: Container(
+                clipBehavior: Clip.hardEdge,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(loadImage(item.backdropPath ??
-                            (item.posterPath.isEmpty
-                                ? Constants.dummyNetworkImage
-                                : item.posterPath))))),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: ImageWithLoader(
+                  image: item.posterPath.isEmpty &&
+                          (item.backdropPath == null ||
+                              item.backdropPath!.isEmpty)
+                      ? Constants.dummyNetworkImage
+                      : loadImage(item.backdropPath ?? item.posterPath),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             Align(

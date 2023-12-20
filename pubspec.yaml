@@ -53,10 +53,13 @@ dependencies:
   fast_cached_network_image: ^1.2.0
   path_provider: ^2.1.1
   youtube_player_flutter: ^8.1.2
+  internet_connection_checker: ^1.0.0+1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  floor_generator: ^1.4.2
+  build_runner: ^2.1.2  
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
