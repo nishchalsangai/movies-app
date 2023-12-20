@@ -21,6 +21,7 @@ class _UpcomingMoviesViewState extends State<UpcomingMoviesView> {
   Widget build(BuildContext context) {
     return Scaffold(
        extendBodyBehindAppBar: true,
+    extendBody: true,
       appBar: AppBar(
         title: Text(
           'Watch',

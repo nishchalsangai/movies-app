@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:fast_cached_network_image/fast_cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/core/helpers/app_theme.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -31,7 +32,7 @@ void main() async {
           ),
           ChangeNotifierProvider(
             lazy: false,
-            create: (_) =>  sl<BottomNavigationManager>(),
+            create: (_) => sl<BottomNavigationManager>(),
           ),
           ChangeNotifierProvider(
             lazy: false,
@@ -57,6 +58,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  
   @override
   Widget build(BuildContext context) {
     final router = Provider.of<MyRouter>(context, listen: true).router;

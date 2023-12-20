@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movies_app/core/helpers/constants.dart';
 import 'package:movies_app/core/router/route_path.dart';
+import 'package:movies_app/core/widgets/error_view.dart';
 import 'package:movies_app/dependency_injection.dart';
 import 'package:movies_app/modules/base/views/base_view.dart';
 import 'package:movies_app/modules/dashboard/views/dashboard_view.dart';
@@ -124,13 +125,17 @@ class MyRouter {
         path: '${RoutePath.video.path}/:video_id',
         pageBuilder: (BuildContext context, GoRouterState state) {
           final videoId = state.pathParameters['video_id'] ?? '';
-          return buildPageWithSlideTransition(
-            child: VideoView(
-              id: videoId,
-            ),
-            context: context,
-            state: state,
-          );
+          if (videoId.isEmpty) {
+            return const NoTransitionPage(child: ErrorView());
+          } else {
+            return buildPageWithSlideTransition(
+              child: VideoView(
+                id: videoId,
+              ),
+              context: context,
+              state: state,
+            );
+          }
         },
       ),
       GoRoute(
@@ -163,7 +168,7 @@ class MyRouter {
           );
         },
       ),
-         GoRoute(
+      GoRoute(
         name: RoutePath.seatMapping.name,
         path: RoutePath.seatMapping.path,
         pageBuilder: (BuildContext context, GoRouterState state) {

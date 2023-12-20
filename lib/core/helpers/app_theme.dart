@@ -53,36 +53,8 @@ class AppTheme {
         backgroundColor: Colors.white, surfaceTintColor: Colors.white),
     dialogBackgroundColor: Colors.white,
     textSelectionTheme: const TextSelectionThemeData(
-      cursorColor: baseColor, //<-- SEE HERE
+      cursorColor: baseColor,
     ),
-    // outlinedButtonTheme: OutlinedButtonThemeData(
-    //   style: ButtonStyle(
-    //     side: MaterialStateProperty.all(
-    //       BorderSide(color: Colors.black.withOpacity(0.5), width: 0.5),
-    //     ),
-    //     shape: MaterialStateProperty.all(
-    //       RoundedRectangleBorder(
-    //         borderRadius: BorderRadius.circular(20),
-    //       ),
-    //     ),
-    //   ),
-    // ),
-    // elevatedButtonTheme: ElevatedButtonThemeData(
-    //   style: ButtonStyle(
-    //     shape: MaterialStateProperty.all(
-    //       RoundedRectangleBorder(
-    //         borderRadius: BorderRadius.circular(20),
-    //       ),
-    //     ),
-    //     textStyle: MaterialStateProperty.all(
-    //       const TextStyle(
-    //         fontSize: 16,
-    //         color: Colors.white,
-    //         fontWeight: FontWeight.w500,
-    //       ),
-    //     ),
-    //   ),
-    // ),
     primarySwatch: 0xff00000.toMaterialColor(),
     useMaterial3: true,
 

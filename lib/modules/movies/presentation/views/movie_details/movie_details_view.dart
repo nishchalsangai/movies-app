@@ -5,6 +5,7 @@ import 'package:movies_app/core/helpers/app_theme.dart';
 import 'package:movies_app/core/helpers/constants.dart';
 import 'package:movies_app/core/helpers/extensions.dart';
 import 'package:movies_app/core/helpers/image_file.dart';
+import 'package:movies_app/core/helpers/toast.dart';
 import 'package:movies_app/core/router/route_path.dart';
 import 'package:movies_app/core/widgets/error_view.dart';
 import 'package:movies_app/core/widgets/image_with_loader.dart';
@@ -97,15 +98,24 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
                                         });
                                   },
                                   watchTrailerCallBack: () {
-                                    context.pushNamed(RoutePath.video.name,
-                                        pathParameters: {
-                                          'video_id': context
-                                              .read<VideoCubit>()
-                                              .state
-                                              .videos!
-                                              .first
-                                              .key!
-                                        });
+                                    context.read<VideoCubit>().state.videos ==
+                                                null ||
+                                            context
+                                                .read<VideoCubit>()
+                                                .state
+                                                .videos!
+                                                .isEmpty
+                                        ? showSnackBar('No Video Found')
+                                        : context.pushNamed(
+                                            RoutePath.video.name,
+                                            pathParameters: {
+                                                'video_id': context
+                                                    .read<VideoCubit>()
+                                                    .state
+                                                    .videos!
+                                                    .first
+                                                    .key!
+                                              });
                                   },
                                 ),
                               ),

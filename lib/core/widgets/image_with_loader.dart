@@ -11,7 +11,7 @@ class ImageWithLoader extends StatelessWidget {
     return FastCachedImage(
       url: image,
       loadingBuilder: (context, progress) {
-        return Container(
+        return SizedBox(
           width: double.infinity,
           // color: Colors.white,
           child: Stack(
